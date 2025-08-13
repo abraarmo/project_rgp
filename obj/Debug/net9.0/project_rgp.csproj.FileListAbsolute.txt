@@ -12,3 +12,4 @@ C:\Users\My Login\Desktop\VS CODE\Personal Project\project_rpg\project_rgp\obj\D
 C:\Users\My Login\Desktop\VS CODE\Personal Project\project_rpg\project_rgp\obj\Debug\net9.0\project_rgp.pdb
 C:\Users\My Login\Desktop\VS CODE\Personal Project\project_rpg\project_rgp\obj\Debug\net9.0\project_rgp.genruntimeconfig.cache
 C:\Users\My Login\Desktop\VS CODE\Personal Project\project_rpg\project_rgp\obj\Debug\net9.0\ref\project_rgp.dll
+C:\Users\My Login\Desktop\VS CODE\Personal Project\project_rpg\project_rgp\obj\Debug\net9.0\project_rgp.sourcelink.json
