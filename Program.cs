@@ -10,9 +10,9 @@ class Program
 
     static void Main(string[] args)
     {
-        Intro.message();
-        Level1.RunGame();
-        Level1.ending();
+        // Intro.message();
+        // Level1.RunGame();
+        // Level1.ending();
         Level2.RunGame();
     }
 

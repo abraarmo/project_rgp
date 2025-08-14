@@ -16,26 +16,70 @@ public static class Level2
     public static void RunGame()
     {
         Console.Clear();
-        Console.WriteLine("------------------------------------");
-        Console.WriteLine("LEVEL 2 – SHADOW REALM: MAZE ESCAPE");
-        Console.WriteLine("------------------------------------");
+        Console.WriteLine(@"
+        ╔═══════════════════════════════════════════════════╗
+        ║         LEVEL 2 – SHADOW REALM: MAZE ESCAPE       ║
+        ╚═══════════════════════════════════════════════════╝
+");
+        Console.WriteLine("\nFind the key, reach the exit, survive the maze.");
+        Console.WriteLine("Press any key to approach the gate...");
         Console.ReadKey(true);
-        Console.WriteLine("Find the key, unlock the exit, and escape the maze.");
-        Console.ReadKey(true);
+
         Console.Clear();
-        Console.WriteLine("Move: N, S, E, W (one step at a time).");
-        Console.WriteLine("You can move using a combination, e.g., WWWEE");
-        Console.WriteLine("This moves you three spaces west and then two spaces east.");
+        Console.WriteLine(@"
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+         ████████▀▀▀░░░░░░░░░░░░░░░▀▀▀██████████
+         ███████▀░░░░░░░░░░░░░░░░░░░░░▀█████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ██████░░░░░░░░░░░░░░░░░░░░░░░░░████████
+         ███████░░░░░░░░░░░░░░░░░░░░░░░█████████
+         ████████▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄██████████
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+         ███████████████████████████████████████
+");
+        Console.WriteLine("The gate looms before you...");
         Console.ReadKey(true);
+
         Console.Clear();
-        Console.WriteLine("The grid is 5x5 and the map will be hidden, so you may want to draw it out.");
+        Console.WriteLine("MOVEMENT:");
+        Console.WriteLine(" N = North | S = South | E = East | W = West");
+        Console.WriteLine(" Chain moves: e.g. 'NNEE' = 2 up, 2 right.");
+        Console.WriteLine(" Stay within the 5x5 grid.");
         Console.ReadKey(true);
+
         Console.Clear();
-        Console.WriteLine("Rooms: \n Exit (needs key) \n Key (collect once) \n Monster (fight) \n Trap (damage) \n Empty (nothing).");
-        Console.WriteLine("Win: Exit with key.  Lose: Health reaches 0.");
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("ROOM TYPES:\n");
+        Console.WriteLine(" ┌───┐");
+        Console.WriteLine(" │ K │   = Key (collect before exit)");
+        Console.WriteLine(" ├───┤");
+        Console.WriteLine(" │ E │   = Exit (needs key)");
+        Console.WriteLine(" ├───┤");
+        Console.WriteLine(" │ M │   = Monster (fight quickly!)");
+        Console.WriteLine(" ├───┤");
+        Console.WriteLine(" │ T │   = Trap (-20 HP)");
+        Console.WriteLine(" └───┘");
+        Console.WriteLine("Empty = Nothing happens");
         Console.ReadKey(true);
+
         Console.Clear();
+        Console.WriteLine("WIN: Get the key, then reach the exit.");
+        Console.WriteLine("LOSE: HP drops to 0.");
+        Console.WriteLine("\nPress any key to begin...");
+        Console.ReadKey(true);
+
+        Console.Clear();
+
 
         // build bag
         List<string> bag = new List<string>();
@@ -140,8 +184,25 @@ public static class Level2
             else if (position == "M")
             {
                 int MonsterHealth = 100;
-                Console.WriteLine("Write 'attack' to damage the monster. Per hit is 25hp.");
-                Console.WriteLine("Take more than 3 seconds or type anything else and it will damage you by 30hp.");
+                Console.Clear();
+                Console.WriteLine(@"
+              ,     \    /      ,
+             / \    )\__/(     / \
+            /   \  (_\  /_)   /   \
+      ____ /_____\__\@  @/___/_____\ ____
+     |             |\../|              |
+     |              \VV/               |
+     |    MONSTER EMERGES FROM SHADOW  |
+     |_________________________________|
+             |    /\ /      \ /\    |
+             |  /   V        V   \  |
+             |/     `--------'     \|
+             '----------------------'
+    ");
+                Console.WriteLine("Type 'attack' within 3 seconds to strike first!");
+                Console.WriteLine("If you're too slow or type wrong, you take 30 damage.");
+                Console.WriteLine($"Monster HP: {MonsterHealth} | Your HP: {player.Health}");
+                Console.WriteLine("--------------------------------------------------");
 
                 while (MonsterHealth > 0 && player.Health > 0)
                 {
@@ -152,34 +213,72 @@ public static class Level2
                     if (elapsed > 3)
                     {
                         player.Health -= 30;
-                        Console.WriteLine($"Too slow! Monster hits you! Your HP: {player.Health}");
+                        Console.WriteLine(@"
+                💥 The monster strikes you! (-30 HP)
+            ");
                     }
                     else if (attack1 == "attack")
                     {
                         MonsterHealth -= 25;
-                        Console.WriteLine($"You hit the monster! Monster HP: {MonsterHealth}");
+                        Console.WriteLine(@"
+                ⚔ You slash the monster! (-25 HP)
+            ");
                     }
                     else
                     {
                         player.Health -= 30;
-                        Console.WriteLine($"Miss! Monster hits you! Your HP: {player.Health}");
+                        Console.WriteLine(@"
+                ❌ You missed! The monster claws you! (-30 HP)
+            ");
                     }
+
+                    Console.WriteLine($"Monster HP: {MonsterHealth} | Your HP: {player.Health}");
+                    Console.WriteLine("--------------------------------------------------");
                 }
 
-                if (player.Health <= 0) { Console.WriteLine("You died."); return; }
+                if (player.Health <= 0)
+                {
+                    Console.WriteLine("💀 You died.");
+                    return;
+                }
 
                 if (MonsterHealth <= 0)
                 {
-                    Console.WriteLine("You defeated the monster!");
+                    Console.WriteLine(@"
+            🩸 The monster collapses!
+            ❤️ You recover +50 HP
+        ");
                     player.Health += 50;
                     Console.WriteLine($"Your HP: {player.Health}");
-                    grid[player.Y, player.X] = "."; // clear room after win
+                    grid[player.Y, player.X] = ".";
                 }
             }
             else if (position == "K")
             {
                 inv.Add("Key");
-                Console.WriteLine("You can now find the exit and use it to exit the maze");
+                Console.Clear();
+                Console.WriteLine(@"
+        ______________
+       /              \
+      /    ________    \
+     |    /        \    |
+     |   |          |   |
+      \   \   --   /   /
+       \   \______/   /
+        \            /
+         \__________/
+             ||
+             ||
+             ||
+             ||
+         ====||====
+         ====||====
+             ||
+             ||
+             ||
+            ==== 
+    ");
+                Console.WriteLine("You found the KEY! The exit can now be unlocked...");
                 grid[player.Y, player.X] = ".";
             }
             else if (position == "E")
