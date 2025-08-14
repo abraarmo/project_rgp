@@ -13,7 +13,10 @@ class Program
         Intro.message();
         Level1.RunGame();
         Level1.ending();
+        Level2.RunGame();
     }
 
     
 }
+
+
